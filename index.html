@@ -1,0 +1,833 @@
+<!DOCTYPE HTML>
+<!--
+	LeadCore Landing Page
+	www.leadcore.cloud
+-->
+<html>
+	<head>
+		<title>LeadCore - Streamline Your Lead Management</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="LeadCore helps you connect, organize, and convert leads from multiple sources. Integrate with JobNimbus and Gmail to streamline your lead management process." />
+		<meta name="keywords" content="lead management software, sales lead tracking, JobNimbus integration, Gmail lead import, sales lead dashboard" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			:root {
+				/* Dark mode colors (default) */
+				--primary-color: #5EEAD4;
+				--secondary-color: #1E40AF;
+				--accent-color: #3B82F6;
+				--background-color: #111111;
+				--text-color: #F3F4F6;
+				--sidebar-color: #121825;
+				--section-bg: #191919;
+				--card-bg: rgba(255, 255, 255, 0.05);
+				--border-color: var(--primary-color);
+				
+				/* Light mode colors (applied with .light-mode class) */
+				--light-primary-color: #38bfb3;
+				--light-secondary-color: #3b5bdb;
+				--light-accent-color: #4285F4;
+				--light-background-color: #ffffff;
+				--light-text-color: #333333;
+				--light-sidebar-color: #f0f4f8;
+				--light-section-bg: #f8fafc;
+				--light-card-bg: rgba(0, 0, 0, 0.03);
+				--light-border-color: var(--light-primary-color);
+			}
+			
+			/* Theme Toggle Switch */
+			.theme-switch-wrapper {
+				position: fixed;
+				top: 20px;
+				right: 20px;
+				z-index: 100;
+				display: flex;
+				align-items: center;
+				background: rgba(0, 0, 0, 0.2);
+				padding: 8px 12px;
+				border-radius: 50px;
+				transition: background-color 0.3s ease;
+			}
+			
+			.light-mode .theme-switch-wrapper {
+				background: rgba(255, 255, 255, 0.8);
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			}
+			
+			.theme-switch {
+				display: inline-block;
+				height: 24px;
+				position: relative;
+				width: 45px;
+			}
+			
+			.theme-switch input {
+				display: none;
+			}
+			
+			.slider {
+				background-color: #ccc;
+				bottom: 0;
+				cursor: pointer;
+				left: 0;
+				position: absolute;
+				right: 0;
+				top: 0;
+				transition: .4s;
+				border-radius: 34px;
+			}
+			
+			.slider:before {
+				background-color: white;
+				bottom: 4px;
+				content: "";
+				height: 16px;
+				left: 4px;
+				position: absolute;
+				transition: .4s;
+				width: 16px;
+				border-radius: 50%;
+			}
+			
+			input:checked + .slider {
+				background-color: var(--accent-color);
+			}
+			
+			input:checked + .slider:before {
+				transform: translateX(20px);
+			}
+			
+			.theme-icon {
+				margin: 0 10px;
+				color: #FFF;
+				font-size: 16px;
+			}
+			
+			.light-mode .theme-icon {
+				color: #333;
+			}
+			
+			/* Light mode transformations */
+			body.light-mode {
+				background-color: var(--light-background-color);
+				color: var(--light-text-color);
+			}
+			
+			.light-mode .wrapper.style1 {
+				background-color: var(--light-background-color);
+				color: var(--light-text-color);
+			}
+			
+			.light-mode .wrapper.style3 {
+				background-color: var(--light-secondary-color);
+				color: white;
+			}
+			
+			/* Fix text colors in light mode */
+			.light-mode p, 
+			.light-mode h1, 
+			.light-mode h2, 
+			.light-mode h3, 
+			.light-mode h4,
+			.light-mode ul li,
+			.light-mode label,
+			.light-mode .content .inner {
+				color: var(--light-text-color);
+			}
+			
+			.light-mode .wrapper.style3 p, 
+			.light-mode .wrapper.style3 h1, 
+			.light-mode .wrapper.style3 h2, 
+			.light-mode .wrapper.style3 h3, 
+			.light-mode .wrapper.style3 h4,
+			.light-mode .wrapper.style3 ul li {
+				color: white;
+			}
+			
+			.light-mode input, 
+			.light-mode textarea {
+				background-color: rgba(0, 0, 0, 0.03);
+				color: var(--light-text-color);
+			}
+			
+			.light-mode a:not(.button) {
+				color: var(--light-secondary-color);
+			}
+			
+			.light-mode a:not(.button):hover {
+				color: var(--light-primary-color);
+			}
+			
+			.light-mode .button.primary {
+				background-color: var(--light-accent-color) !important;
+			}
+			
+			.light-mode .button.primary:hover {
+				background-color: #2874e3 !important;
+			}
+			
+			.light-mode #sidebar {
+				background-color: var(--light-sidebar-color);
+			}
+			
+			.light-mode #sidebar .inner {
+				color: var(--light-text-color);
+			}
+			
+			.light-mode #sidebar nav ul li a {
+				color: var(--light-text-color);
+			}
+			
+			.light-mode #sidebar nav ul li a:after {
+				background: linear-gradient(to right, var(--light-primary-color), var(--light-sidebar-color));
+			}
+			
+			.wrapper.style1 {
+				background-color: var(--background-color);
+				color: var(--text-color);
+			}
+			
+			.wrapper.style3 {
+				background-color: var(--secondary-color);
+				color: white;
+			}
+			
+			.button.primary {
+				background-color: var(--accent-color) !important;
+				box-shadow: none !important;
+			}
+			
+			.button.primary:hover {
+				background-color: #2563EB !important;
+			}
+			
+			#sidebar {
+				background-color: var(--sidebar-color);
+			}
+			
+			#sidebar .inner {
+				color: var(--text-color);
+			}
+			
+			#sidebar nav ul li a {
+				border-bottom: none;
+				position: relative;
+			}
+			
+			#sidebar nav ul li a:after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				height: 2px;
+				background: linear-gradient(to right, var(--primary-color), var(--sidebar-color));
+				transform: scaleX(0);
+				transition: transform 0.3s ease;
+				transform-origin: right;
+			}
+			
+			#sidebar nav ul li a:hover:after,
+			#sidebar nav ul li a.active:after {
+				transform: scaleX(1);
+				transform-origin: left;
+			}
+			
+			.spotlights section {
+				background-color: var(--section-bg);
+			}
+			
+			.light-mode .spotlights section {
+				background-color: var(--light-section-bg);
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+			}
+			
+			.pricing-tier {
+				background-color: var(--card-bg);
+				border-radius: 10px;
+				padding: 2em;
+				margin: 1em;
+				text-align: center;
+				transition: transform 0.3s ease;
+			}
+			
+			.light-mode .pricing-tier {
+				background-color: var(--light-card-bg);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+			}
+			
+			.pricing-tier:hover {
+				transform: translateY(-10px);
+			}
+			
+			.pricing-tier.highlighted {
+				border: 2px solid var(--border-color);
+			}
+			
+			.light-mode .pricing-tier.highlighted {
+				border: 2px solid var(--light-border-color);
+			}
+			
+			.pricing-tier h3 {
+				color: var(--primary-color);
+			}
+			
+			.light-mode .pricing-tier h3 {
+				color: var(--light-primary-color);
+			}
+			
+			.pricing-tier .price {
+				font-size: 2.5em;
+				font-weight: bold;
+				margin: 0.5em 0;
+			}
+			
+			.pricing-tier ul {
+				list-style: none;
+				padding: 0;
+				margin: 1em 0;
+				text-align: left;
+			}
+			
+			.pricing-tier ul li {
+				padding: 0.5em 0;
+				position: relative;
+				padding-left: 1.5em;
+			}
+			
+			.pricing-tier ul li:before {
+				content: "✓";
+				color: var(--primary-color);
+				position: absolute;
+				left: 0;
+			}
+			
+			.light-mode .pricing-tier ul li:before {
+				color: var(--light-primary-color);
+			}
+			
+			.faq-item {
+				margin-bottom: 1em;
+			}
+			
+			.faq-question {
+				cursor: pointer;
+				padding: 1em;
+				background-color: var(--card-bg);
+				border-radius: 5px;
+				font-weight: bold;
+				position: relative;
+			}
+			
+			.light-mode .faq-question {
+				background-color: var(--light-card-bg);
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+			}
+			
+			.faq-answer {
+				padding: 1em;
+				display: none;
+				background-color: rgba(255, 255, 255, 0.02);
+				border-radius: 0 0 5px 5px;
+			}
+			
+			.light-mode .faq-answer {
+				background-color: rgba(0, 0, 0, 0.01);
+			}
+			
+			.features section .icon {
+				color: var(--primary-color);
+				border-color: var(--primary-color);
+			}
+			
+			.light-mode .features section .icon {
+				color: var(--light-primary-color);
+				border-color: var(--light-primary-color);
+			}
+			
+			.step-process {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+				margin: 2em 0;
+			}
+			
+			.step {
+				flex: 1 1 200px;
+				text-align: center;
+				padding: 1em;
+				margin: 1em;
+				position: relative;
+			}
+			
+			.step-number {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				background-color: var(--primary-color);
+				color: var(--secondary-color);
+				font-weight: bold;
+				font-size: 1.5em;
+				margin: 0 auto 1em;
+			}
+			
+			.light-mode .step-number {
+				background-color: var(--light-primary-color);
+				color: white;
+			}
+			
+			.testimonial {
+				background-color: var(--card-bg);
+				border-radius: 10px;
+				padding: 2em;
+				margin: 1em 0;
+				position: relative;
+			}
+			
+			.light-mode .testimonial {
+				background-color: var(--light-card-bg);
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+			}
+			
+			.testimonial-content {
+				font-style: italic;
+				margin-bottom: 1em;
+			}
+			
+			.testimonial-author {
+				display: flex;
+				align-items: center;
+			}
+			
+			.testimonial-author img {
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				margin-right: 1em;
+			}
+			
+			.testimonial-author .info h4 {
+				margin: 0;
+			}
+			
+			.testimonial-author .info p {
+				margin: 0;
+				color: rgba(255, 255, 255, 0.6);
+			}
+			
+			.light-mode .testimonial-author .info p {
+				color: rgba(0, 0, 0, 0.6);
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+	
+		<!-- Theme Switcher -->
+		<div class="theme-switch-wrapper">
+			<span class="theme-icon">🌙</span>
+			<label class="theme-switch" for="checkbox">
+				<input type="checkbox" id="checkbox" />
+				<div class="slider"></div>
+			</label>
+			<span class="theme-icon">☀️</span>
+		</div>
+
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						<ul>
+							<li><a href="#intro">Welcome</a></li>
+							<li><a href="#problem">The Problem</a></li>
+							<li><a href="#features">Features</a></li>
+							<li><a href="#process">How It Works</a></li>
+							<li><a href="#testimonials">Testimonials</a></li>
+							<li><a href="#pricing">Pricing</a></li>
+							<li><a href="#faq">FAQ</a></li>
+							<li><a href="#contact">Contact</a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro/Hero -->
+					<section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1>Streamline Your Lead Management</h1>
+							<p>Connect, organize, and convert leads from multiple sources with LeadCore's powerful CRM platform.<br />
+							Never let a valuable lead slip through the cracks again.</p>
+							<ul class="actions">
+								<li><a href="#" class="button primary">Get Started</a></li>
+								<li><a href="#contact" class="button">Book a Demo</a></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- Problem Statement -->
+					<section id="problem" class="wrapper style2 spotlights">
+						<div class="inner">
+							<h2>Managing Leads Shouldn't Be Complicated</h2>
+							<p>Is your team struggling with these common lead management challenges?</p>
+						</div>
+						<section>
+							<a href="#" class="image"><img src="images/pic01.jpg" alt="Scattered leads illustration" data-position="center center" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Scattered Leads</h2>
+									<p>Valuable leads hidden across multiple platforms, emails, and spreadsheets, making it impossible to track and follow up effectively.</p>
+								</div>
+							</div>
+						</section>
+						<section>
+							<a href="#" class="image"><img src="images/pic02.jpg" alt="Lost opportunities illustration" data-position="top center" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Lost Opportunities</h2>
+									<p>Missing follow-ups and delayed responses that cause potential customers to choose your competitors instead.</p>
+								</div>
+							</div>
+						</section>
+						<section>
+							<a href="#" class="image"><img src="images/pic03.jpg" alt="Manual processes illustration" data-position="25% 25%" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Manual Processes</h2>
+									<p>Spending hours on data entry and manual updates across different systems, wasting valuable time that could be spent closing deals.</p>
+								</div>
+							</div>
+						</section>
+					</section>
+
+				<!-- Features -->
+					<section id="features" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>LeadCore's Powerful Features</h2>
+							<p>Our platform brings together all the tools you need to capture, organize, and convert more leads into customers.</p>
+							<div class="features">
+								<section>
+									<span class="icon solid major fa-sync-alt"></span>
+									<h3>Seamless JobNimbus Integration</h3>
+									<p>Automatically sync your leads with JobNimbus, keeping all your customer data up-to-date across platforms without duplicate entry.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-envelope"></span>
+									<h3>Import Leads from Gmail</h3>
+									<p>Connect your Gmail account and easily import leads from your email conversations, ensuring no opportunity is missed.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-chart-bar"></span>
+									<h3>Powerful Lead Dashboard</h3>
+									<p>Track, filter, and manage your leads from a centralized dashboard with status updates and activity tracking for your entire team.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-robot"></span>
+									<h3>Automated Lead Nurturing</h3>
+									<p>Set up automated follow-ups and nurture sequences to keep your leads engaged and move them through your sales pipeline.</p>
+								</section>
+							</div>
+							<ul class="actions">
+								<li><a href="#" class="button primary">Start Free Trial</a></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- How It Works -->
+					<section id="process" class="wrapper style1 fade-up">
+						<div class="inner">
+							<h2>How LeadCore Works</h2>
+							<p>Get up and running with LeadCore in four simple steps:</p>
+							<div class="step-process">
+								<div class="step">
+									<div class="step-number">1</div>
+									<h3>Connect Your Accounts</h3>
+									<p>Integrate your Gmail and JobNimbus accounts with secure, OAuth-based authentication.</p>
+								</div>
+								<div class="step">
+									<div class="step-number">2</div>
+									<h3>Import & Organize</h3>
+									<p>Import your existing leads and automatically organize them based on your preferences.</p>
+								</div>
+								<div class="step">
+									<div class="step-number">3</div>
+									<h3>Manage & Track</h3>
+									<p>Use the dashboard to track lead status, assign tasks, and monitor progress.</p>
+								</div>
+								<div class="step">
+									<div class="step-number">4</div>
+									<h3>Convert More Leads</h3>
+									<p>Leverage automation and insights to convert more leads into satisfied customers.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+
+				<!-- Testimonials -->
+					<section id="testimonials" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>What Our Customers Say</h2>
+							<p>Real stories from businesses that transformed their lead management with LeadCore.</p>
+							
+							<div class="testimonial">
+								<div class="testimonial-content">
+									"Since implementing LeadCore, we've increased our lead conversion rate by 32%. The Gmail integration alone has helped us capture dozens of leads that would have otherwise been missed."
+								</div>
+								<div class="testimonial-author">
+									<img src="images/pic05.jpg" alt="Sarah Johnson" />
+									<div class="info">
+										<h4>Sarah Johnson</h4>
+										<p>Sales Director, Apex Roofing</p>
+									</div>
+								</div>
+							</div>
+							
+							<div class="testimonial">
+								<div class="testimonial-content">
+									"The JobNimbus integration saves our team at least 10 hours per week in manual data entry. LeadCore has paid for itself many times over just in time savings alone."
+								</div>
+								<div class="testimonial-author">
+									<img src="images/pic06.jpg" alt="Michael Rodriguez" />
+									<div class="info">
+										<h4>Michael Rodriguez</h4>
+										<p>Operations Manager, Sunshine Solar</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+				<!-- Pricing -->
+					<section id="pricing" class="wrapper style1 fade-up">
+						<div class="inner">
+							<h2>Simple, Transparent Pricing</h2>
+							<p>Affordable pricing with no hidden fees or complicated tiers.</p>
+							
+							<div style="display: flex; flex-wrap: wrap; justify-content: center; max-width: 900px; margin: 0 auto;">
+								<div class="pricing-tier highlighted" style="flex: 1 1 400px; margin: 1em 2em;">
+									<h3>LeadCore Standard</h3>
+									<div class="price">$250<span style="font-size: 0.5em;">/month</span></div>
+									<p>Everything you need to transform your lead management process.</p>
+									<ul>
+										<li>Up to 5 team members included</li>
+										<li>Unlimited leads</li>
+										<li>Gmail integration</li>
+										<li>JobNimbus integration</li>
+										<li>Advanced lead dashboard</li>
+										<li>Automated follow-ups</li>
+										<li>Priority support</li>
+										<li>Complete data ownership</li>
+										<li>Regular feature updates</li>
+									</ul>
+									<a href="#" class="button primary">Get Started</a>
+								</div>
+								
+								<div style="flex: 1 1 300px; margin: 2em; display: flex; flex-direction: column; justify-content: center;">
+									<h3 style="color: var(--primary-color); margin-bottom: 1em;">Need more seats?</h3>
+									<div style="font-size: 1.2em; margin-bottom: 1em;">
+										<strong>Additional seats</strong><br>
+										<span style="font-size: 1.5em; font-weight: bold;">$50</span><span style="font-size: 0.8em;">/month per seat</span>
+									</div>
+									<p>Easily add more team members as your business grows.</p>
+									<a href="#contact" class="button">Contact Us</a>
+								</div>
+							</div>
+							
+							<div style="text-align: center; margin-top: 3em;">
+								<p style="font-size: 1.1em;">All plans include a <strong>14-day free trial</strong>. No credit card required to get started.</p>
+							</div>
+						</div>
+					</section>
+
+				<!-- FAQ -->
+					<section id="faq" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>Frequently Asked Questions</h2>
+							<p>Get answers to common questions about LeadCore.</p>
+							
+							<div class="faq-item">
+								<div class="faq-question">How does the Gmail integration work?</div>
+								<div class="faq-answer">Our Gmail integration uses OAuth to securely access your emails. Once connected, LeadCore can analyze your conversations to identify potential leads, automatically extract contact information, and organize it in your dashboard. Your email data remains private and secure throughout this process.</div>
+							</div>
+							
+							<div class="faq-item">
+								<div class="faq-question">Is my data safe with LeadCore?</div>
+								<div class="faq-answer">Absolutely. LeadCore is built on enterprise-grade infrastructure with end-to-end encryption. We follow industry best practices for security, use OAuth for third-party integrations, and never store your credentials. Your data privacy is our top priority.</div>
+							</div>
+							
+							<div class="faq-item">
+								<div class="faq-question">How long does it take to set up LeadCore?</div>
+								<div class="faq-answer">Most customers are fully set up and running within 1-2 hours. The initial account creation takes just minutes, and our integration wizards guide you through connecting your Gmail and JobNimbus accounts. If you need assistance, our support team is available to help.</div>
+							</div>
+							
+							<div class="faq-item">
+								<div class="faq-question">Can I export my data from LeadCore?</div>
+								<div class="faq-answer">Yes, you can export your lead data at any time in CSV or Excel format. This ensures you always have access to your information and can use it in other systems if needed.</div>
+							</div>
+							
+							<div class="faq-item">
+								<div class="faq-question">Do you offer a free trial?</div>
+								<div class="faq-answer">Yes, we offer a 14-day free trial with full access to all features. No credit card is required to start your trial, and you can upgrade to a paid plan at any time.</div>
+							</div>
+						</div>
+					</section>
+
+				<!-- Final CTA -->
+					<section id="final-cta" class="wrapper style1 fade-up">
+						<div class="inner" style="text-align: center;">
+							<h2>Ready to Transform Your Lead Management?</h2>
+							<p>Join hundreds of businesses already converting more leads with LeadCore.</p>
+							<ul class="actions" style="justify-content: center;">
+								<li><a href="#" class="button primary">Start Your Free Trial</a></li>
+								<li><a href="#contact" class="button">Schedule a Demo</a></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- Contact -->
+					<section id="contact" class="wrapper style1 fade-up">
+						<div class="inner">
+							<h2>Get in touch</h2>
+							<p>Have questions or need help getting started? Reach out to our team for assistance.</p>
+							<div class="split style1">
+								<section>
+									<form method="post" action="#">
+										<div class="fields">
+											<div class="field half">
+												<label for="name">Name</label>
+												<input type="text" name="name" id="name" />
+											</div>
+											<div class="field half">
+												<label for="email">Email</label>
+												<input type="text" name="email" id="email" />
+											</div>
+											<div class="field">
+												<label for="message">Message</label>
+												<textarea name="message" id="message" rows="5"></textarea>
+											</div>
+										</div>
+										<ul class="actions">
+											<li><a href="" class="button submit">Send Message</a></li>
+										</ul>
+									</form>
+								</section>
+								<section>
+									<ul class="contact">
+										<li>
+											<h3>Email</h3>
+											<a href="mailto:info@leadcore.cloud">info@leadcore.cloud</a>
+										</li>
+										<li>
+											<h3>Social</h3>
+											<ul class="icons">
+												<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+												<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+												<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+											</ul>
+										</li>
+									</ul>
+								</section>
+							</div>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; LeadCore. All rights reserved.</li>
+						<li><a href="#">Privacy Policy</a></li>
+						<li><a href="#">Terms of Service</a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script>
+				// FAQ toggle functionality
+				document.addEventListener('DOMContentLoaded', function() {
+					const faqQuestions = document.querySelectorAll('.faq-question');
+					
+					faqQuestions.forEach(question => {
+						question.addEventListener('click', function() {
+							const answer = this.nextElementSibling;
+							
+							if (answer.style.display === 'block') {
+								answer.style.display = 'none';
+							} else {
+								answer.style.display = 'block';
+							}
+						});
+					});
+					
+					// Set active class for sidebar navigation based on scroll position
+					const sections = document.querySelectorAll('section[id]');
+					const navLinks = document.querySelectorAll('#sidebar nav ul li a');
+					
+					function highlightNavOnScroll() {
+						let scrollY = window.pageYOffset;
+						
+						sections.forEach(section => {
+							const sectionHeight = section.offsetHeight;
+							const sectionTop = section.offsetTop - 100;
+							const sectionId = section.getAttribute('id');
+							
+							if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+								navLinks.forEach(link => {
+									link.classList.remove('active');
+									if(link.getAttribute('href') === '#' + sectionId) {
+										link.classList.add('active');
+									}
+								});
+							}
+						});
+					}
+					
+					window.addEventListener('scroll', highlightNavOnScroll);
+					highlightNavOnScroll(); // Run once on page load
+					
+					// Theme Switcher Functionality
+					const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+					const currentTheme = localStorage.getItem('theme');
+					
+					// Check if a theme preference exists in localStorage
+					if (currentTheme) {
+						document.body.classList.add(currentTheme);
+						
+						// Update the toggle switch if light mode is already set
+						if (currentTheme === 'light-mode') {
+							toggleSwitch.checked = true;
+						}
+					}
+					
+					function switchTheme(e) {
+						if (e.target.checked) {
+							document.body.classList.add('light-mode');
+							localStorage.setItem('theme', 'light-mode');
+						} else {
+							document.body.classList.remove('light-mode');
+							localStorage.setItem('theme', 'dark-mode');
+						}
+					}
+					
+					toggleSwitch.addEventListener('change', switchTheme, false);
+				});
+			</script>
+
+	</body>
+</html>
